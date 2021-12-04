@@ -1,0 +1,19 @@
+{
+  "name": "Arches",
+  "symbol": "",
+  "image": "0.png",
+  "properties": {
+    "files": [
+      {
+        "uri": "0.png",
+        "type": "image/png"
+      }
+    ],
+    "creators": [
+      {
+        "address": "BbENh6XBtcgR7nX6hVKRYk9DmLX98hhhL7zt6XfEH2WP",
+        "share": 100
+      }
+    ]
+  }
+}

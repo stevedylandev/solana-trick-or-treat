@@ -1,0 +1,19 @@
+{
+  "name": "Obtuse",
+  "symbol": "",
+  "image": "1.png",
+  "properties": {
+    "files": [
+      {
+        "uri": "1.png",
+        "type": "image/png"
+      }
+    ],
+    "creators": [
+      {
+        "address": "BbENh6XBtcgR7nX6hVKRYk9DmLX98hhhL7zt6XfEH2WP",
+        "share": 100
+      }
+    ]
+  }
+}

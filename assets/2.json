@@ -1,0 +1,19 @@
+{
+  "name": "Uniform",
+  "symbol": "",
+  "image": "2.png",
+  "properties": {
+    "files": [
+      {
+        "uri": "2.png",
+        "type": "image/png"
+      }
+    ],
+    "creators": [
+      {
+        "address": "BbENh6XBtcgR7nX6hVKRYk9DmLX98hhhL7zt6XfEH2WP",
+        "share": 100
+      }
+    ]
+  }
+}
