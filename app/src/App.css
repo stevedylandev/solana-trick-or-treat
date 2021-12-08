@@ -1,9 +1,11 @@
 .App {
-  height: 100vh;
-  background-color: rgb(20, 20, 20);
+  min-height: 100vh;
+  background-image: url("./assets/bg 1.png");
   overflow: scroll;
   text-align: center;
   overflow: hidden;
+  background-position: center;
+  background-size: cover;
 }
 
 .container {
@@ -29,7 +31,8 @@
 }
 
 .header {
-  margin: 0;
+  font-family: 'Emilys Candy', cursive;
+  margin: 2rem 0;
   font-size: 50px;
   font-weight: bold;
 }
@@ -59,26 +62,30 @@
 
 .connect-wallet-button {
   color: white;
-  background: -webkit-linear-gradient(left, #ff8867, #ff52ff);
+  background: -webkit-linear-gradient(left, #e65800, #fea300);
   background-size: 200% 200%;
   animation: gradient-animation 4s ease infinite;
 }
 
 .mint-button {
-  background: -webkit-linear-gradient(left, #4e44ce, #35aee2);
+  background: -webkit-linear-gradient(left, #e65800, #fea300);
   background-size: 200% 200%;
   animation: gradient-animation 4s ease infinite;
-  margin-left: 10px;
+  /* margin-left: 10px; */
+  width: 300px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0rem 4rem;
 }
 
 .footer-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
   width: 100%;
   bottom: 0;
   left: 0;
+  margin-top: 4rem;
   /* padding-bottom: 45px; */
 }
 

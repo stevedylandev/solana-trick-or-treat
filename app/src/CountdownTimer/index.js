@@ -22,7 +22,7 @@ const CountdownTimer = ({ dropDate }) => {
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
       // We have our desired output, set it in state!
-      setTimerString(`${days}d ${hours}h ${minutes}m ${seconds}s`);
+      setTimerString(`${days}:${hours}:${minutes}:${seconds}`);
 
       // If our distance passes zero this means that it's drop time!
       if (distance < 0) {
@@ -41,8 +41,8 @@ const CountdownTimer = ({ dropDate }) => {
 
   return (
     <div className="timer-container">
-      <p className="timer-header">Candy Drop Starting In</p>
-      {timerString && <p className="timer-value">{`⏰ ${timerString}`}</p>}
+      <p className="timer-header">NFT Drop Starting In</p>
+      {timerString && <p className="timer-value">{`${timerString}`}</p>}
     </div>
   );
 };
