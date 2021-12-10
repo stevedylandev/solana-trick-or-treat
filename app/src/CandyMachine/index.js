@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import Lottie from "react-lottie";
+import animationData1 from "../assets/ghost.json";
+import animationData2 from "../assets/ghostCandy.json";
 import { Connection, PublicKey } from '@solana/web3.js';
 import { Program, Provider, web3 } from '@project-serum/anchor';
 import { MintLayout, TOKEN_PROGRAM_ID, Token } from '@solana/spl-token';
@@ -100,18 +103,42 @@ const CandyMachine = ({ walletAddress }) => {
     setIsLoadingMints(false);
   };
 
-  const renderMintedItems = () => (
-    <div className="gif-container">
-      <p className="sub-text">Minted Items ✨</p>
-      <div className="gif-grid">
-        {mints.map((mint) => (
-          <div className="gif-item" key={mint}>
-            <img src={mint} alt={`Minted NFT ${mint}`} />
+  // const renderMintedItems = () => (
+  //   <div className="gif-container">
+  //     <p className="sub-text">Minted Items ✨</p>
+  //     <p>{`Items Minted: ${machineStats.itemsRedeemed} / ${machineStats.itemsAvailable}`}</p>
+  //     <div className="gif-grid">
+  //       {mints.map((mint) => (
+  //         <div className="gif-item" key={mint}>
+  //           <img src={mint} alt={`Minted NFT ${mint}`} />
+  //         </div>
+  //       ))}
+  //     </div>
+  //   </div>
+  // );
+
+  const renderMintedItems = () => {
+    if (isLoadingMints === true) {
+      return (
+        <Lottie options={defaultOptions1} height={300} width={300} />
+      )
+    } else {
+      return (
+        <div className="gif-container">
+          {/* <p className="sub-text">Minted Items ✨</p> */}
+          <p className="sub-text">{`Items Minted ✨: ${machineStats.itemsRedeemed} / ${machineStats.itemsAvailable}`}</p>
+          <div className="gif-grid">
+            {mints.map((mint) => (
+              <div className="gif-item" key={mint}>
+                <img src={mint} alt={`Minted NFT ${mint}`} />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
-  );
+        </div>
+      )
+    }
+  };
+
 
   const renderDropTimer = () => {
     // Get the current date and dropDate in a JavaScript Date object
@@ -147,6 +174,23 @@ const CandyMachine = ({ walletAddress }) => {
 
     return provider;
   };
+
+  const defaultOptions1 = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData1,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice"
+    }
+  }
+  const defaultOptions2 = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData2,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice"
+    }
+  }
 
   const fetchHashTable = async (hash, metadataEnabled) => {
     const connection = new web3.Connection(
@@ -332,14 +376,18 @@ const CandyMachine = ({ walletAddress }) => {
         if (error.message.indexOf('0x138')) {
         } else if (error.message.indexOf('0x137')) {
           message = `SOLD OUT!`;
+          alert(message)
         } else if (error.message.indexOf('0x135')) {
           message = `Insufficient funds to mint. Please fund your wallet.`;
+          alert(message)
         }
       } else {
         if (error.code === 311) {
           message = `SOLD OUT!`;
+          alert(message)
         } else if (error.code === 312) {
           message = `Minting period hasn't started yet.`;
+          alert(message)
         }
       }
 
@@ -377,25 +425,47 @@ const CandyMachine = ({ walletAddress }) => {
     });
   };
 
+  const renderMintButton = () => {
+    if (machineStats.itemsRedeemed === machineStats.itemsAvailable) {
+      return (
+        <p className="sub-text">Sold Out 🧙🏻‍♀️</p>
+      )
+    } if (isMinting === true) {
+      return (
+        <Lottie options={defaultOptions2} width={300} height={300} />
+      )
+    } else {
+      return (
+
+        <button
+          className="cta-button mint-button"
+          onClick={mintToken}
+          disabled={isMinting}
+        >
+          Mint NFT
+        </button>
+      )
+    }
+  }
+
 
   return (
     machineStats && (
       <div className="machine-container">
         {renderDropTimer()}
-        <p>{`Drop Date: ${machineStats.goLiveDateTimeString}`}</p>
-        <p>{`Items Minted: ${machineStats.itemsRedeemed} / ${machineStats.itemsAvailable}`}</p>
-        {machineStats.itemsRedeemed === machineStats.itemsAvailable ? (
-          <p className="sub-text">Sold Out 🙊</p>
-        ) : (
-          <button
-            className="cta-button mint-button"
-            onClick={mintToken}
-            disabled={isMinting}
-          >
-            Mint NFT
-          </button>
-        )}
-        {isLoadingMints && <p>LOADING MINTS</p>}
+        {/* <p>{`Drop Date: ${machineStats.goLiveDateTimeString}`}</p> */}
+        {/* {machineStats.itemsRedeemed === machineStats.itemsAvailable ? ( */}
+        {/*   <p className="sub-text">Sold Out 🧙🏻‍♀️</p> */}
+        {/* ) : ( */}
+        {/*   <button */}
+        {/*     className="cta-button mint-button" */}
+        {/*     onClick={mintToken} */}
+        {/*     disabled={isMinting} */}
+        {/*   > */}
+        {/*     Mint NFT */}
+        {/*   </button> */}
+        {/* )} */}
+        {renderMintButton()}
         {mints.length > 0 && renderMintedItems()}
       </div>
     )
